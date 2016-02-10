@@ -57,7 +57,8 @@ angular.module('Store.InstanceStore.Service', [
    * Set single instance in the store
    */
   InstanceStore.prototype.set = function(instance) {
-    return $q.resolve((this.instance = instance));
+    return this.validateIsModel(instance, true)
+      .then(instance => (this.instance = instance));
   };
 
   /**
@@ -74,14 +75,6 @@ angular.module('Store.InstanceStore.Service', [
   InstanceStore.prototype.save = function(item, data) {
     return this.validateIsModel(item, true)
       .then(item => item.save(data));
-  };
-
-  /**
-   * Delete item
-   */
-  InstanceStore.prototype.delete = function(item) {
-    return this.validateIsModel(item)
-      .then(item => item.delete());
   };
 
   //Return

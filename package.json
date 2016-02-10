@@ -1,6 +1,6 @@
 {
   "name": "meanie-angular-store",
-  "description": "An Angular service for managing data",
+  "description": "An Angular service for managing model instances",
   "version": "1.0.0",
   "homepage": "https://github.com/meanie/angular-store",
   "author": {
@@ -24,7 +24,8 @@
     "angular",
     "angularjs",
     "store",
-    "data"
+    "data",
+    "models"
   ],
   "main": "index.js",
   "files": [
