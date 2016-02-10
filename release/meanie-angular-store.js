@@ -1,5 +1,5 @@
 /**
- * meanie-angular-store - v1.0.0 - 10-1-2016
+ * meanie-angular-store - v1.0.1 - 10-1-2016
  * https://github.com/meanie/angular-store
  *
  * Copyright (c) 2016 Adam Buczynski <me@adambuczynski.com>
@@ -205,7 +205,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var _this = this;
 
       //Loaded already?
-      if (this.loaded && !refresh) {
+      if (this.loaded && !filter && !refresh) {
         return $q.resolve(Array.from(this.collection.values()));
       }
 
@@ -389,7 +389,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      * Set single instance in the store
      */
     InstanceStore.prototype.set = function (instance) {
-      return $q.resolve(this.instance = instance);
+      var _this2 = this;
+
+      return this.validateIsModel(instance, true).then(function (instance) {
+        return _this2.instance = instance;
+      });
     };
 
     /**
@@ -406,15 +410,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     InstanceStore.prototype.save = function (item, data) {
       return this.validateIsModel(item, true).then(function (item) {
         return item.save(data);
-      });
-    };
-
-    /**
-     * Delete item
-     */
-    InstanceStore.prototype.delete = function (item) {
-      return this.validateIsModel(item).then(function (item) {
-        return item.delete();
       });
     };
 
