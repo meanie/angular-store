@@ -1,5 +1,5 @@
 /**
- * meanie-angular-store - v1.0.1 - 10-1-2016
+ * meanie-angular-store - v1.0.2 - 10-1-2016
  * https://github.com/meanie/angular-store
  *
  * Copyright (c) 2016 Adam Buczynski <me@adambuczynski.com>
@@ -190,7 +190,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       //Prepare collection
       this.collection = new Map();
-      this.loaded = false;
+      this.isLoaded = false;
     }
 
     /**
@@ -205,7 +205,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var _this = this;
 
       //Loaded already?
-      if (this.loaded && !filter && !refresh) {
+      if (this.isLoaded && !filter && !refresh) {
         return $q.resolve(Array.from(this.collection.values()));
       }
 
@@ -214,7 +214,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         items.forEach(function (item) {
           return _this.add(item);
         });
-        _this.loaded = true;
+        _this.isLoaded = true;
         return items;
       });
     };
@@ -280,7 +280,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       return this.validateIsModel(items, true).then(function (items) {
         return _this5.add(items);
       }).finally(function () {
-        return _this5.isLoaded = true;
+        _this5.isLoaded = true;
       });
     };
 
@@ -378,7 +378,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       this.promise = this.model.get().then(function (instance) {
         return _this.instance = instance;
       }).finally(function () {
-        return _this.promise = null;
+        _this.promise = null;
       });
 
       //Return promise
