@@ -34,8 +34,6 @@ angular.module('Store.Service', [
     return this;
   };
 
-  /*
-
   /**
    * Service getter
    */

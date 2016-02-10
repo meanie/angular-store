@@ -20,7 +20,7 @@
 		"afterEach": false,
 		"it": false,
 		"inject": false,
-		"expect": false
+    "expect": false
 	},
 	"latedef": "nofunc",
 	"noarg": true,
