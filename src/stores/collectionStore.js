@@ -35,7 +35,7 @@ angular.module('Store.CollectionStore.Service', [
   CollectionStore.prototype.query = function(filter, refresh) {
 
     //Loaded already?
-    if (this.loaded && !refresh) {
+    if (this.loaded && !filter && !refresh) {
       return $q.resolve(Array.from(this.collection.values()));
     }
 
