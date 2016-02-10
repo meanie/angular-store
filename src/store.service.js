@@ -3,8 +3,9 @@
  * Module definition and dependencies
  */
 angular.module('Store.Service', [
-  'Store.Types.Collection.Service',
-  'Store.Types.Instance.Service'
+  'Store.BaseStore.Service',
+  'Store.CollectionStore.Service',
+  'Store.InstanceStore.Service'
 ])
 
 /**
@@ -16,9 +17,7 @@ angular.module('Store.Service', [
   this.defaults = {
     model: '',
     methods: null,
-
-    //Type of store, either "collection" or "instance"
-    type: 'collection'
+    service: '$collectionStore'
   };
 
   //Registered stores
@@ -37,7 +36,7 @@ angular.module('Store.Service', [
   /**
    * Service getter
    */
-  this.$get = function($log, $storeCollection, $storeInstance) {
+  this.$get = function($log, $injector) {
 
     //Initialize store interface
     var Store = function(store) {
@@ -47,29 +46,34 @@ angular.module('Store.Service', [
     //Append all stores
     angular.forEach(this.collections, function(config, name) {
 
-      //Warn if overwriting
+      //Extend store config with defaults
+      config = angular.extend({}, this.defaults, config);
+
+      //Make sure we have a valid store service
+      if (!config.service || !$injector.has(config.service)) {
+        return $log.error(
+          'Unknown service', config.service, 'specified for', name, 'store'
+        );
+      }
+
+      //Make sure we have a valid model specified
+      if (!config.model || !$injector.has(config.model)) {
+        return $log.error(
+          'Unknown model specified for', name, 'store:', config.model
+        );
+      }
+
+      //Initialize store
+      let StoreService = $injector.get(config.service);
+      let StoreInstance = new StoreService(name, config);
+
+      //Check if overwriting
       if (Store[name]) {
         $log.warn('Store', name, 'is being overwritten.');
       }
 
-      //Extend store config with defaults
-      config = angular.extend({}, this.defaults, config);
-
-      //Initialize store
-      if (config.type === 'collection') {
-        Store[name] = $storeCollection(name, config);
-      }
-      else if (config.type === 'instance') {
-        Store[name] = $storeInstance(name, config);
-      }
-      else {
-        return $log.warn(
-          'Unknown store type', config.type, 'specified for', name, 'store'
-        );
-      }
-
-      //Extend with custom methods
-      angular.extend(Store[name], config.methods || {});
+      //Set
+      Store[name] = StoreInstance;
     }, this);
 
     //Return
