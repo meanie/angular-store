@@ -47,7 +47,9 @@ angular.module('Store.InstanceStore.Service', [
     //Get from server
     this.promise = this.model.get()
       .then(instance => (this.instance = instance))
-      .finally(() => (this.promise = null));
+      .finally(() => {
+        this.promise = null;
+      });
 
     //Return promise
     return this.promise;

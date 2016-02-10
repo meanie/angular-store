@@ -21,7 +21,7 @@ angular.module('Store.CollectionStore.Service', [
 
     //Prepare collection
     this.collection = new Map();
-    this.loaded = false;
+    this.isLoaded = false;
   }
 
   /**
@@ -35,7 +35,7 @@ angular.module('Store.CollectionStore.Service', [
   CollectionStore.prototype.query = function(filter, refresh) {
 
     //Loaded already?
-    if (this.loaded && !filter && !refresh) {
+    if (this.isLoaded && !filter && !refresh) {
       return $q.resolve(Array.from(this.collection.values()));
     }
 
@@ -43,7 +43,7 @@ angular.module('Store.CollectionStore.Service', [
     return this.model.query(filter)
       .then(items => {
         items.forEach(item => this.add(item));
-        this.loaded = true;
+        this.isLoaded = true;
         return items;
       });
   };
@@ -95,7 +95,9 @@ angular.module('Store.CollectionStore.Service', [
     items = items || [];
     return this.validateIsModel(items, true)
       .then(items => this.add(items))
-      .finally(() => (this.isLoaded = true));
+      .finally(() => {
+        this.isLoaded = true;
+      });
   };
 
   /**************************************************************************
