@@ -60,7 +60,7 @@ angular.module('Store.Service', [
 
       //Verbose info
       if (config.verbose) {
-        $log.info('Setting up', name, 'store with config', config);
+        $log.info('Store', name + ':', config);
       }
 
       //Make sure we have a valid store service
