@@ -1,5 +1,5 @@
 /**
- * meanie-angular-store - v1.0.6 - 12-1-2016
+ * meanie-angular-store - v1.0.7 - 12-1-2016
  * https://github.com/meanie/angular-store
  *
  * Copyright (c) 2016 Adam Buczynski <me@adambuczynski.com>
@@ -68,7 +68,7 @@
 
         //Verbose info
         if (config.verbose) {
-          $log.info('Setting up', name, 'store with config', config);
+          $log.info('Store', name + ':', config);
         }
 
         //Make sure we have a valid store service
@@ -144,9 +144,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       Object.defineProperty(this, 'model', {
         get: function get() {
           Model = Model || $injector.get(config.model);
-          if (config.verbose) {
-            $log.info('Resolved', config.model, 'model as', Model);
-          }
           return Model;
         }
       });
