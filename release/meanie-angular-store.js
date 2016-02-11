@@ -1,5 +1,5 @@
 /**
- * meanie-angular-store - v1.0.2 - 10-1-2016
+ * meanie-angular-store - v1.0.4 - 12-1-2016
  * https://github.com/meanie/angular-store
  *
  * Copyright (c) 2016 Adam Buczynski <me@adambuczynski.com>
@@ -178,7 +178,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   /**
    * Collection store factory
    */
-  .factory('$collectionStore', ['$q', '$baseStore', function $collectionStore($q, $baseStore) {
+  .factory('$collectionStore', ['$q', '$log', '$baseStore', function $collectionStore($q, $log, $baseStore) {
 
     /**
      * Constructor
@@ -209,6 +209,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         return $q.resolve(Array.from(this.collection.values()));
       }
 
+      //Ensure method exists on model
+      if (!angular.isFunction(this.model.query)) {
+        $log.warn('No query method present on model for', this.name, 'store');
+        return $q.resolve([]);
+      }
+
       //Query from server
       return this.model.query(filter).then(function (items) {
         items.forEach(function (item) {
@@ -236,6 +242,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       //Present?
       if (this.collection.has(id)) {
         return $q.resolve(this.collection.get(id));
+      }
+
+      //Ensure method exists on model
+      if (!angular.isFunction(this.model.findById)) {
+        $log.warn('No findById method present on model for', this.name, 'store');
+        return $q.resolve([]);
       }
 
       //Find on server
@@ -338,7 +350,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   /**
    * Instance store factory
    */
-  .factory('$instanceStore', ['$q', '$baseStore', function $instanceStore($q, $baseStore) {
+  .factory('$instanceStore', ['$q', '$log', '$baseStore', function $instanceStore($q, $log, $baseStore) {
 
     /**
      * Constructor
@@ -372,6 +384,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       //Promise present?
       if (this.promise) {
         return this.promise;
+      }
+
+      //Ensure method exists on model
+      if (!angular.isFunction(this.model.get)) {
+        $log.warn('No get method present on model for', this.name, 'store');
+        return $q.resolve([]);
       }
 
       //Get from server
