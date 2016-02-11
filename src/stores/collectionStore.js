@@ -41,7 +41,9 @@ angular.module('Store.CollectionStore.Service', [
 
     //Ensure method exists on model
     if (!angular.isFunction(this.model.query)) {
-      $log.warn('No query method present on model for', this.name, 'store');
+      if (this.config.verbose) {
+        $log.warn('No query method present on model for', this.name, 'store');
+      }
       return $q.resolve([]);
     }
 
@@ -74,8 +76,10 @@ angular.module('Store.CollectionStore.Service', [
 
     //Ensure method exists on model
     if (!angular.isFunction(this.model.findById)) {
-      $log.warn('No findById method present on model for', this.name, 'store');
-      return $q.resolve([]);
+      if (this.config.verbose) {
+        $log.warn('No findById method present on model for', this.name, 'store');
+      }
+      return $q.resolve(null);
     }
 
     //Find on server
