@@ -25,6 +25,14 @@ angular.module('Store.Service', [
   this.collections = {};
 
   /**
+   * Set verbose
+   */
+  this.setVerbose = function(verbose) {
+    this.defaults.verbose = !!verbose;
+    return this;
+  };
+
+  /**
    * Register a new store
    */
   this.registerStore = function(name, config) {
