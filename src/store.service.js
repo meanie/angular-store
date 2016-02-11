@@ -17,7 +17,8 @@ angular.module('Store.Service', [
   this.defaults = {
     model: '',
     methods: null,
-    service: '$collectionStore'
+    service: '$collectionStore',
+    verbose: false
   };
 
   //Registered stores
@@ -48,6 +49,11 @@ angular.module('Store.Service', [
 
       //Extend store config with defaults
       config = angular.extend({}, this.defaults, config);
+
+      //Verbose info
+      if (config.verbose) {
+        $log.info('Setting up', name, 'store with config', config);
+      }
 
       //Make sure we have a valid store service
       if (!config.service || !$injector.has(config.service)) {

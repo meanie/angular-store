@@ -36,6 +36,9 @@ angular.module('Store.BaseStore.Service', [])
     Object.defineProperty(this, 'model', {
       get() {
         Model = Model || $injector.get(config.model);
+        if (config.verbose) {
+          $log.info('Resolved', config.model, 'model as', Model);
+        }
         return Model;
       }
     });
