@@ -1,5 +1,5 @@
 /**
- * meanie-angular-store - v1.0.5 - 12-1-2016
+ * meanie-angular-store - v1.0.6 - 12-1-2016
  * https://github.com/meanie/angular-store
  *
  * Copyright (c) 2016 Adam Buczynski <me@adambuczynski.com>
@@ -31,6 +31,14 @@
 
     //Registered stores
     this.collections = {};
+
+    /**
+     * Set verbose
+     */
+    this.setVerbose = function (verbose) {
+      this.defaults.verbose = !!verbose;
+      return this;
+    };
 
     /**
      * Register a new store
