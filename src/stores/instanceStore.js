@@ -9,7 +9,7 @@ angular.module('Store.InstanceStore.Service', [
 /**
  * Instance store factory
  */
-.factory('$instanceStore', function $instanceStore($q, $baseStore) {
+.factory('$instanceStore', function $instanceStore($q, $log, $baseStore) {
 
   /**
    * Constructor
@@ -42,6 +42,12 @@ angular.module('Store.InstanceStore.Service', [
     //Promise present?
     if (this.promise) {
       return this.promise;
+    }
+
+    //Ensure method exists on model
+    if (!angular.isFunction(this.model.get)) {
+      $log.warn('No get method present on model for', this.name, 'store');
+      return $q.resolve([]);
     }
 
     //Get from server

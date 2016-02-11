@@ -9,7 +9,7 @@ angular.module('Store.CollectionStore.Service', [
 /**
  * Collection store factory
  */
-.factory('$collectionStore', function $collectionStore($q, $baseStore) {
+.factory('$collectionStore', function $collectionStore($q, $log, $baseStore) {
 
   /**
    * Constructor
@@ -39,6 +39,12 @@ angular.module('Store.CollectionStore.Service', [
       return $q.resolve(Array.from(this.collection.values()));
     }
 
+    //Ensure method exists on model
+    if (!angular.isFunction(this.model.query)) {
+      $log.warn('No query method present on model for', this.name, 'store');
+      return $q.resolve([]);
+    }
+
     //Query from server
     return this.model.query(filter)
       .then(items => {
@@ -64,6 +70,12 @@ angular.module('Store.CollectionStore.Service', [
     //Present?
     if (this.collection.has(id)) {
       return $q.resolve(this.collection.get(id));
+    }
+
+    //Ensure method exists on model
+    if (!angular.isFunction(this.model.findById)) {
+      $log.warn('No findById method present on model for', this.name, 'store');
+      return $q.resolve([]);
     }
 
     //Find on server
