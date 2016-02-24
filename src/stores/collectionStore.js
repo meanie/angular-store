@@ -125,7 +125,10 @@ angular.module('Store.CollectionStore.Service', [
     }
     else {
       if (typeof item.id === 'undefined') {
-        $log.warn('No `id` property present on item', item);
+        $log.warn(
+          'Trying to add item to', this.name, ' store,',
+          'but no `id` property present on item:', item
+        );
         return $q.reject();
       }
       this.collection.set(item.id, item);
@@ -141,6 +144,13 @@ angular.module('Store.CollectionStore.Service', [
       item.forEach(item => this.collection.delete(item.id));
     }
     else {
+      if (typeof item.id === 'undefined') {
+        $log.warn(
+          'Trying to remove item from', this.name, ' store,',
+          'but no `id` property present on item:', item
+        );
+        return $q.reject();
+      }
       this.collection.delete(item.id);
     }
     return $q.resolve(item);
