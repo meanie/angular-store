@@ -124,6 +124,10 @@ angular.module('Store.CollectionStore.Service', [
       item.forEach(item => this.collection.set(item.id, item));
     }
     else {
+      if (typeof item.id === 'undefined') {
+        $log.warn('No `id` property present on item', item);
+        return $q.reject();
+      }
       this.collection.set(item.id, item);
     }
     return $q.resolve(item);
