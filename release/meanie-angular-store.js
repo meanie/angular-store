@@ -1,5 +1,5 @@
 /**
- * meanie-angular-store - v1.0.8 - 25-1-2016
+ * meanie-angular-store - v1.0.9 - 25-1-2016
  * https://github.com/meanie/angular-store
  *
  * Copyright (c) 2016 Adam Buczynski <me@adambuczynski.com>
@@ -332,6 +332,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           return _this6.collection.set(item.id, item);
         });
       } else {
+        if (typeof item.id === 'undefined') {
+          $log.warn('Trying to add item to', this.name, ' store,', 'but no `id` property present on item:', item);
+          return $q.reject();
+        }
         this.collection.set(item.id, item);
       }
       return $q.resolve(item);
@@ -348,6 +352,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           return _this7.collection.delete(item.id);
         });
       } else {
+        if (typeof item.id === 'undefined') {
+          $log.warn('Trying to remove item from', this.name, ' store,', 'but no `id` property present on item:', item);
+          return $q.reject();
+        }
         this.collection.delete(item.id);
       }
       return $q.resolve(item);
