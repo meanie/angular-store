@@ -53,8 +53,8 @@ All store methods return promises so they are ideal for chaining and post handli
 The collection store is used to manage a collection of models. It requires the following methods present on your model (each returning a promise):
 
 * `Model.query(filter).then(items => ...)`
-* `Model.save(data).then(item => ...)`
-* `Model.delete().then(item => ...)`
+* `Model.prototype.save(data).then(item => ...)`
+* `Model.prototype.delete().then(item => ...)`
 
 ```js
 angular.module('App.MyModule', [
@@ -114,7 +114,7 @@ angular.module('App.MyModule', [
 The instance store is used to manage a single model, for example the logged in user. It requires the following methods present on your model (each returning a promise):
 
 * `Model.get().then(item => ...)`
-* `Model.save().then(item => ...)`
+* `Model.prototype.save().then(item => ...)`
 
 ```js
 angular.module('App.MyModule', [

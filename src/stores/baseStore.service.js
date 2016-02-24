@@ -42,6 +42,14 @@ angular.module('Store.BaseStore.Service', [])
   }
 
   /**
+   * Method warning logger
+   */
+  BaseStore.prototype.warnMissingMethod = function(method) {
+    $log.warn('No static `' + method + '` method present on model for',
+      this.name, 'store');
+  };
+
+  /**
    * Check if an item is a valid model, optionally converting to a model
    */
   BaseStore.prototype.validateIsModel = function(item, convert) {

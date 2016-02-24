@@ -46,9 +46,7 @@ angular.module('Store.InstanceStore.Service', [
 
     //Ensure method exists on model
     if (!angular.isFunction(this.model.get)) {
-      if (this.config.verbose) {
-        $log.warn('No get method present on model for', this.name, 'store');
-      }
+      this.warnMissingMethod('get');
       return $q.resolve([]);
     }
 
