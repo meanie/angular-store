@@ -1,5 +1,5 @@
 /**
- * meanie-angular-store - v1.0.7 - 12-1-2016
+ * meanie-angular-store - v1.0.8 - 25-1-2016
  * https://github.com/meanie/angular-store
  *
  * Copyright (c) 2016 Adam Buczynski <me@adambuczynski.com>
@@ -150,6 +150,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     }
 
     /**
+     * Method warning logger
+     */
+    BaseStore.prototype.warnMissingMethod = function (method) {
+      $log.warn('No static `' + method + '` method present on model for', this.name, 'store');
+    };
+
+    /**
      * Check if an item is a valid model, optionally converting to a model
      */
     BaseStore.prototype.validateIsModel = function (item, convert) {
@@ -225,7 +232,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       //Ensure method exists on model
       if (!angular.isFunction(this.model.query)) {
-        $log.warn('No query method present on model for', this.name, 'store');
+        this.warnMissingMethod('query');
         return $q.resolve([]);
       }
 
@@ -260,8 +267,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       //Ensure method exists on model
       if (!angular.isFunction(this.model.findById)) {
-        $log.warn('No findById method present on model for', this.name, 'store');
-        return $q.resolve([]);
+        this.warnMissingMethod('findById');
+        return $q.resolve(null);
       }
 
       //Find on server
@@ -402,7 +409,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       //Ensure method exists on model
       if (!angular.isFunction(this.model.get)) {
-        $log.warn('No get method present on model for', this.name, 'store');
+        this.warnMissingMethod('get');
         return $q.resolve([]);
       }
 
