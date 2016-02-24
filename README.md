@@ -56,6 +56,8 @@ The collection store is used to manage a collection of models. It requires the f
 * `Model.prototype.save(data).then(item => ...)`
 * `Model.prototype.delete().then(item => ...)`
 
+Furthermore, it requires that each instance of your data has a unique `id` property by which the store will track your items.
+
 ```js
 angular.module('App.MyModule', [
   'Store.Service'
