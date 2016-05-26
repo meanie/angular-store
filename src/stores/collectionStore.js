@@ -48,8 +48,16 @@ angular.module('Store.CollectionStore.Service', [
     //Query from server
     return this.model.query(filter)
       .then(items => {
+
+        //Add the items
         items.forEach(item => this.add(item));
-        this.isLoaded = true;
+
+        //If this wasn't a filter query, mark as loaded
+        if (!filter) {
+          this.isLoaded = true;
+        }
+
+        //Return the items
         return items;
       });
   };
