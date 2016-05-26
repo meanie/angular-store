@@ -1,5 +1,5 @@
 /**
- * meanie-angular-store - v1.0.9 - 25-1-2016
+ * meanie-angular-store - v1.0.10 - 26-4-2016
  * https://github.com/meanie/angular-store
  *
  * Copyright (c) 2016 Adam Buczynski <me@adambuczynski.com>
@@ -238,10 +238,18 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       //Query from server
       return this.model.query(filter).then(function (items) {
+
+        //Add the items
         items.forEach(function (item) {
           return _this.add(item);
         });
-        _this.isLoaded = true;
+
+        //If this wasn't a filter query, mark as loaded
+        if (!filter) {
+          _this.isLoaded = true;
+        }
+
+        //Return the items
         return items;
       });
     };
