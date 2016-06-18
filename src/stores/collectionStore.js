@@ -34,6 +34,12 @@ angular.module('Store.CollectionStore.Service', [
    */
   CollectionStore.prototype.query = function(filter, refresh) {
 
+    //Boolean passed as filter? Assume it's the refresh parameter
+    if (typeof filter === 'boolean') {
+      refresh = filter;
+      filter = null;
+    }
+
     //Loaded already?
     if (this.isLoaded && !filter && !refresh) {
       return $q.resolve(Array.from(this.collection.values()));
