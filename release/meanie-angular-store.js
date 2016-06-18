@@ -1,5 +1,5 @@
 /**
- * meanie-angular-store - v1.0.10 - 26-4-2016
+ * meanie-angular-store - v1.0.11 - 18-5-2016
  * https://github.com/meanie/angular-store
  *
  * Copyright (c) 2016 Adam Buczynski <me@adambuczynski.com>
@@ -224,6 +224,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      */
     CollectionStore.prototype.query = function (filter, refresh) {
       var _this = this;
+
+      //Boolean passed as filter? Assume it's the refresh parameter
+      if (typeof filter === 'boolean') {
+        refresh = filter;
+        filter = null;
+      }
 
       //Loaded already?
       if (this.isLoaded && !filter && !refresh) {
