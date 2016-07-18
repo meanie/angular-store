@@ -12,9 +12,7 @@ An Angular service for managing model instances
 
 ## Installation
 
-You can install this package using `npm` or `bower`.
-
-### npm
+You can install this package using `npm`:
 
 ```shell
 npm install meanie-angular-store --save
@@ -24,20 +22,6 @@ Include the script `node_modules/meanie-angular-store/release/meanie-angular-sto
 
 ```html
 <script src="node_modules/meanie-angular-store/release/meanie-angular-store.js"></script>
-```
-
-Add `Store.Service` as a dependency for your app.
-
-### bower
-
-```shell
-bower install meanie-angular-store
-```
-
-Include the script `bower_components/meanie-angular-store/release/meanie-angular-store.js` in your build process, or add it via a `<script>` tag to your `index.html`:
-
-```html
-<script src="bower_components/meanie-angular-store/release/meanie-angular-store.js"></script>
 ```
 
 Add `Store.Service` as a dependency for your app.
