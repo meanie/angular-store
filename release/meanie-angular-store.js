@@ -1,5 +1,5 @@
 /**
- * meanie-angular-store - v1.0.11 - 18-5-2016
+ * meanie-angular-store - v1.0.11 - 18-6-2016
  * https://github.com/meanie/angular-store
  *
  * Copyright (c) 2016 Adam Buczynski <me@adambuczynski.com>
