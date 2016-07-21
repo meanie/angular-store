@@ -1,12 +1,9 @@
 /**
- * meanie-angular-store - v1.0.12 - 18-6-2016
- * https://github.com/meanie/angular-store
+ * meanie-angular-store * https://github.com/meanie/angular-store
  *
  * Copyright (c) 2016 Adam Buczynski <me@adambuczynski.com>
  * License: MIT
  */
-'use strict';
-
 (function (window, angular, undefined) {
   'use strict';
 
@@ -99,8 +96,6 @@
     }];
   });
 })(window, window.angular);
-'use strict';
-
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (window, angular, undefined) {
@@ -185,8 +180,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return BaseStore;
   }]);
 })(window, window.angular);
-'use strict';
-
 (function (window, angular, undefined) {
   'use strict';
 
@@ -379,8 +372,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return CollectionStore;
   }]);
 })(window, window.angular);
-'use strict';
-
 (function (window, angular, undefined) {
   'use strict';
 
