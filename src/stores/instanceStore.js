@@ -32,7 +32,7 @@ angular.module('Store.InstanceStore.Service', [
   /**
    * Get single instance from store
    */
-  InstanceStore.prototype.get = function(refresh) {
+  InstanceStore.prototype.get = function(refresh, fallback) {
 
     //Already present?
     if (this.instance && !refresh) {
@@ -53,6 +53,12 @@ angular.module('Store.InstanceStore.Service', [
     //Get from server
     this.promise = this.model.get()
       .then(instance => (this.instance = instance))
+      .catch(error => {
+        if (fallback) {
+          return $q.resolve(this.instance = fallback)
+        }
+        return $q.reject(error);
+      })
       .finally(() => {
         this.promise = null;
       });
