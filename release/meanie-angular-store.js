@@ -431,6 +431,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         return _this.instance = instance;
       }).catch(function (error) {
         if (fallback) {
+          if (fallback === true) {
+            var Model = _this.model;
+            fallback = new Model();
+          }
           return $q.resolve(_this.instance = fallback);
         }
         return $q.reject(error);

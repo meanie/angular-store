@@ -1,7 +1,7 @@
 {
   "name": "meanie-angular-store",
   "description": "An Angular service for managing model instances",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "homepage": "https://github.com/meanie/angular-store",
   "author": {
     "name": "Adam Buczynski",
