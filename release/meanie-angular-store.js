@@ -460,8 +460,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Clear the store
      */
-    InstanceStore.prototype.clear = function () {
-      this.instance = null;
+    InstanceStore.prototype.clear = function (fallback) {
+      if (fallback === true) {
+        var Model = this.model;
+        fallback = new Model();
+      } else {
+        fallback = null;
+      }
+      this.instance = fallback;
       return $q.resolve();
     };
 
