@@ -3,7 +3,7 @@
  * Module definition and dependencies
  */
 angular.module('Store.InstanceStore.Service', [
-  'Store.BaseStore.Service'
+  'Store.BaseStore.Service',
 ])
 
 /**
@@ -55,7 +55,11 @@ angular.module('Store.InstanceStore.Service', [
       .then(instance => (this.instance = instance))
       .catch(error => {
         if (fallback) {
-          return $q.resolve(this.instance = fallback)
+          if (fallback === true) {
+            let Model = this.model;
+            fallback = new Model();
+          }
+          return $q.resolve(this.instance = fallback);
         }
         return $q.reject(error);
       })
