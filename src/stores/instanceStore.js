@@ -82,8 +82,15 @@ angular.module('Store.InstanceStore.Service', [
   /**
    * Clear the store
    */
-  InstanceStore.prototype.clear = function() {
-    this.instance = null;
+  InstanceStore.prototype.clear = function(fallback) {
+    if (fallback === true) {
+      let Model = this.model;
+      fallback = new Model();
+    }
+    else {
+      fallback = null;
+    }
+    this.instance = fallback;
     return $q.resolve();
   };
 
