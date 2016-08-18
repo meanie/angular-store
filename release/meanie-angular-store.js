@@ -407,7 +407,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Get single instance from store
      */
-    InstanceStore.prototype.get = function (refresh) {
+    InstanceStore.prototype.get = function (refresh, fallback) {
       var _this = this;
 
       //Already present?
@@ -429,6 +429,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       //Get from server
       this.promise = this.model.get().then(function (instance) {
         return _this.instance = instance;
+      }).catch(function (error) {
+        if (fallback) {
+          return $q.resolve(_this.instance = fallback);
+        }
+        return $q.reject(error);
       }).finally(function () {
         _this.promise = null;
       });
