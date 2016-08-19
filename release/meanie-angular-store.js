@@ -407,7 +407,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Get single instance from store
      */
-    InstanceStore.prototype.get = function (refresh, fallback) {
+    InstanceStore.prototype.get = function (refresh) {
       var _this = this;
 
       //Already present?
@@ -429,17 +429,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       //Get from server
       this.promise = this.model.get().then(function (instance) {
         return _this.instance = instance;
-      }).catch(function (error) {
-        if (fallback) {
-          if (fallback === true) {
-            var Model = _this.model;
-            fallback = new Model();
-          }
-          return $q.resolve(_this.instance = fallback);
-        }
-        return $q.reject(error);
       }).finally(function () {
-        _this.promise = null;
+        return _this.promise = null;
       });
 
       //Return promise
@@ -460,14 +451,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Clear the store
      */
-    InstanceStore.prototype.clear = function (fallback) {
-      if (fallback === true) {
-        var Model = this.model;
-        fallback = new Model();
-      } else {
-        fallback = null;
-      }
-      this.instance = fallback;
+    InstanceStore.prototype.clear = function () {
+      this.instance = null;
       return $q.resolve();
     };
 
