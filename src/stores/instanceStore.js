@@ -32,7 +32,7 @@ angular.module('Store.InstanceStore.Service', [
   /**
    * Get single instance from store
    */
-  InstanceStore.prototype.get = function(refresh, fallback) {
+  InstanceStore.prototype.get = function(refresh) {
 
     //Already present?
     if (this.instance && !refresh) {
@@ -53,19 +53,7 @@ angular.module('Store.InstanceStore.Service', [
     //Get from server
     this.promise = this.model.get()
       .then(instance => (this.instance = instance))
-      .catch(error => {
-        if (fallback) {
-          if (fallback === true) {
-            let Model = this.model;
-            fallback = new Model();
-          }
-          return $q.resolve(this.instance = fallback);
-        }
-        return $q.reject(error);
-      })
-      .finally(() => {
-        this.promise = null;
-      });
+      .finally(() => this.promise = null);
 
     //Return promise
     return this.promise;
@@ -82,15 +70,8 @@ angular.module('Store.InstanceStore.Service', [
   /**
    * Clear the store
    */
-  InstanceStore.prototype.clear = function(fallback) {
-    if (fallback === true) {
-      let Model = this.model;
-      fallback = new Model();
-    }
-    else {
-      fallback = null;
-    }
-    this.instance = fallback;
+  InstanceStore.prototype.clear = function() {
+    this.instance = null;
     return $q.resolve();
   };
 
