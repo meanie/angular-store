@@ -3,7 +3,7 @@
  * Module definition and dependencies
  */
 angular.module('Store.CollectionStore.Service', [
-  'Store.BaseStore.Service'
+  'Store.BaseStore.Service',
 ])
 
 /**
@@ -74,6 +74,13 @@ angular.module('Store.CollectionStore.Service', [
   CollectionStore.prototype.clear = function() {
     this.collection.clear();
     return $q.resolve();
+  };
+
+  /**
+   * Check if has item by ID
+   */
+  CollectionStore.prototype.has = function(id) {
+    return this.collection.has(id);
   };
 
   /**
