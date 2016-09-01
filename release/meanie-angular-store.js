@@ -262,6 +262,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     /**
+     * Check if has item by ID
+     */
+    CollectionStore.prototype.has = function (id) {
+      return this.collection.has(id);
+    };
+
+    /**
      * Find item by ID
      */
     CollectionStore.prototype.findById = function (id) {
