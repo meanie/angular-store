@@ -5,7 +5,7 @@
 angular.module('Store.Service', [
   'Store.BaseStore.Service',
   'Store.CollectionStore.Service',
-  'Store.InstanceStore.Service'
+  'Store.InstanceStore.Service',
 ])
 
 /**
@@ -18,7 +18,7 @@ angular.module('Store.Service', [
     model: '',
     methods: null,
     service: '$collectionStore',
-    verbose: false
+    verbose: false,
   };
 
   //Registered stores
@@ -48,7 +48,7 @@ angular.module('Store.Service', [
   this.$get = function($log, $injector) {
 
     //Initialize store interface
-    var Store = function(store) {
+    let Store = function(store) {
       return this[store];
     };
 

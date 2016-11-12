@@ -73,6 +73,7 @@ angular.module('Store.CollectionStore.Service', [
    */
   CollectionStore.prototype.clear = function() {
     this.collection.clear();
+    this.isLoaded = false;
     return $q.resolve();
   };
 
