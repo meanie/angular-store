@@ -258,6 +258,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      */
     CollectionStore.prototype.clear = function () {
       this.collection.clear();
+      this.isLoaded = false;
       return $q.resolve();
     };
 
