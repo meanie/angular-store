@@ -87,10 +87,10 @@ angular.module('Store.CollectionStore.Service', [
   /**
    * Find item by ID
    */
-  CollectionStore.prototype.findById = function(id) {
+  CollectionStore.prototype.findById = function(id, refresh) {
 
-    //Present?
-    if (this.collection.has(id)) {
+    //Present and don't want to refresh?
+    if (!refresh && this.collection.has(id)) {
       return $q.resolve(this.collection.get(id));
     }
 
