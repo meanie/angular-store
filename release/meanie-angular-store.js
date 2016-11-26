@@ -272,11 +272,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Find item by ID
      */
-    CollectionStore.prototype.findById = function (id) {
+    CollectionStore.prototype.findById = function (id, refresh) {
       var _this2 = this;
 
-      //Present?
-      if (this.collection.has(id)) {
+      //Present and don't want to refresh?
+      if (!refresh && this.collection.has(id)) {
         return $q.resolve(this.collection.get(id));
       }
 
