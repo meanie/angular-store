@@ -1,6 +1,6 @@
-# meanie-angular-store
+# @meanie/angular-store
 
-[![npm version](https://img.shields.io/npm/v/meanie-angular-store.svg)](https://www.npmjs.com/package/meanie-angular-store)
+[![npm version](https://img.shields.io/npm/v/@meanie/angular-store.svg)](https://www.npmjs.com/package/@meanie/angular-store)
 [![node dependencies](https://david-dm.org/meanie/angular-store.svg)](https://david-dm.org/meanie/angular-store)
 [![github issues](https://img.shields.io/github/issues/meanie/angular-store.svg)](https://github.com/meanie/angular-store/issues)
 [![codacy](https://img.shields.io/codacy/8750e5a072ad45bfbd1cec8dfe415f9a.svg)](https://www.codacy.com/app/meanie/angular-store)
@@ -12,16 +12,20 @@ An Angular service for managing model instances
 
 ## Installation
 
-You can install this package using `npm`:
+You can install this package using `yarn` or `npm`:
 
 ```shell
-npm install meanie-angular-store --save
+#yarn
+yarn add @meanie/angular-store
+
+#npm
+npm install @meanie/angular-store --save
 ```
 
-Include the script `node_modules/meanie-angular-store/release/meanie-angular-store.js` in your build process, or add it via a `<script>` tag to your `index.html`:
+Include the script `node_modules/@meanie/angular-store/release/angular-store.js` in your build process, or add it via a `<script>` tag to your `index.html`:
 
 ```html
-<script src="node_modules/meanie-angular-store/release/meanie-angular-store.js"></script>
+<script src="node_modules/@meanie/angular-store/release/angular-store.js"></script>
 ```
 
 Add `Store.Service` as a dependency for your app.
@@ -189,7 +193,7 @@ angular.module('UserStore.Service', [
 
 ## Issues & feature requests
 
-Please report any bugs, issues, suggestions and feature requests in the [meanie-angular-store issue tracker](https://github.com/meanie/angular-store/issues).
+Please report any bugs, issues, suggestions and feature requests in the [@meanie/angular-store issue tracker](https://github.com/meanie/angular-store/issues).
 
 ## Contributing
 
@@ -202,4 +206,4 @@ Pull requests are welcome! If you would like to contribute to Meanie, please che
 ## License
 (MIT License)
 
-Copyright 2016-2017, [Adam Reis](http://adam.reis.nz)
+Copyright 2016-2017, [Adam Reis](https://adam.reis.nz)
