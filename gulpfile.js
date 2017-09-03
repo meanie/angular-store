@@ -93,6 +93,7 @@ function release() {
   });
   return gulp.src([
     'src/**/*.js',
+    '!src/**/*.spec.js',
   ])
     .pipe(wrapper(angularWrapper()))
     .pipe(sourcemaps.init())
