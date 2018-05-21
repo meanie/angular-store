@@ -9,7 +9,7 @@ angular.module('Store.InstanceStore.Service', [
 /**
  * Instance store factory
  */
-.factory('$instanceStore', function $instanceStore($q, $log, $baseStore) {
+.factory('$instanceStore', function $instanceStore($q, $baseStore) {
 
   /**
    * Constructor
