@@ -1,7 +1,7 @@
 /**
  * @meanie/angular-store * https://github.com/meanie/angular-store
  *
- * Copyright (c) 2017 Adam Reis <adam@reis.nz>
+ * Copyright (c) 2018 Adam Reis <adam@reis.nz>
  * License: MIT
  */
 (function (window, angular, undefined) {
@@ -96,7 +96,7 @@
     }];
   });
 })(window, window.angular);
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 (function (window, angular, undefined) {
   'use strict';
@@ -415,8 +415,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Get single instance from store
      */
-    InstanceStore.prototype.get = function (refresh) {
+    InstanceStore.prototype.get = function (filter, refresh) {
       var _this = this;
+
+      //Boolean given as filter
+      if (typeof filter === 'boolean') {
+        refresh = filter;
+        filter = null;
+      }
 
       //Already present?
       if (this.instance && !refresh) {
@@ -435,7 +441,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       }
 
       //Get from server
-      this.promise = this.model.get().then(function (instance) {
+      this.promise = this.model.get(filter).then(function (instance) {
         return _this.instance = instance;
       }).finally(function () {
         return _this.promise = null;
