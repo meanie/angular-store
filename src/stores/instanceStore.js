@@ -32,7 +32,13 @@ angular.module('Store.InstanceStore.Service', [
   /**
    * Get single instance from store
    */
-  InstanceStore.prototype.get = function(refresh) {
+  InstanceStore.prototype.get = function(filter, refresh) {
+
+    //Boolean given as filter
+    if (typeof filter === 'boolean') {
+      refresh = filter;
+      filter = null;
+    }
 
     //Already present?
     if (this.instance && !refresh) {
@@ -51,7 +57,8 @@ angular.module('Store.InstanceStore.Service', [
     }
 
     //Get from server
-    this.promise = this.model.get()
+    this.promise = this.model
+      .get(filter)
       .then(instance => (this.instance = instance))
       .finally(() => this.promise = null);
 
