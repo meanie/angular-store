@@ -243,8 +243,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           return _this.add(item);
         });
 
-        //If this wasn't a filter query, mark as loaded
-        if (!filter) {
+        //If this wasn't a filter query, mark as loaded if we got any items
+        if (!filter && items.length > 0) {
           _this.isLoaded = true;
         }
 
@@ -392,7 +392,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   /**
    * Instance store factory
    */
-  .factory('$instanceStore', ['$q', '$log', '$baseStore', function $instanceStore($q, $log, $baseStore) {
+  .factory('$instanceStore', ['$q', '$baseStore', function $instanceStore($q, $baseStore) {
 
     /**
      * Constructor
