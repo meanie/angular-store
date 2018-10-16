@@ -32,7 +32,7 @@ angular.module('Store.CollectionStore.Service', [
   /**
    * Query items from model
    */
-  CollectionStore.prototype.query = function(filter, refresh) {
+  CollectionStore.prototype.query = function(filter, refresh, dataKey) {
 
     //Boolean passed as filter? Assume it's the refresh parameter
     if (typeof filter === 'boolean') {
@@ -54,6 +54,12 @@ angular.module('Store.CollectionStore.Service', [
     //Query from server
     return this.model
       .query(filter)
+      .then(data => {
+        if (dataKey && Array.isArray(data[dataKey])) {
+          return data[dataKey];
+        }
+        return data;
+      })
       .then(items => {
 
         //Add the items
