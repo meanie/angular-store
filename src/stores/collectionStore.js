@@ -58,7 +58,10 @@ angular.module('Store.CollectionStore.Service', [
         if (dataKey && Array.isArray(data[dataKey])) {
           return data[dataKey];
         }
-        return data;
+        else if (Array.isArray(data)) {
+          return data;
+        }
+        throw new Error(`Unexpected data format for ${this.name} store`);
       })
       .then(items => {
 
