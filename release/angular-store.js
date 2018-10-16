@@ -215,7 +215,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Query items from model
      */
-    CollectionStore.prototype.query = function (filter, refresh) {
+    CollectionStore.prototype.query = function (filter, refresh, dataKey) {
       var _this = this;
 
       //Boolean passed as filter? Assume it's the refresh parameter
@@ -236,7 +236,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       }
 
       //Query from server
-      return this.model.query(filter).then(function (items) {
+      return this.model.query(filter).then(function (data) {
+        if (dataKey && Array.isArray(data[dataKey])) {
+          return data[dataKey];
+        } else if (Array.isArray(data)) {
+          return data;
+        }
+        throw new Error('Unexpected data format for ' + _this.name + ' store');
+      }).then(function (items) {
 
         //Add the items
         items.forEach(function (item) {
