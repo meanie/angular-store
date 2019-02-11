@@ -1,7 +1,7 @@
 /**
  * @meanie/angular-store * https://github.com/meanie/angular-store
  *
- * Copyright (c) 2018 Adam Reis <adam@reis.nz>
+ * Copyright (c) 2019 Adam Reis <adam@reis.nz>
  * License: MIT
  */
 (function (window, angular, undefined) {
@@ -215,7 +215,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     /**
      * Query items from model
      */
-    CollectionStore.prototype.query = function (filter, refresh, dataKey) {
+    CollectionStore.prototype.query = function (filter, refresh) {
       var _this = this;
 
       //Boolean passed as filter? Assume it's the refresh parameter
@@ -235,7 +235,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         return $q.resolve([]);
       }
 
+      //Get data key from config
+      var dataKey = this.config.dataKey;
+
       //Query from server
+
       return this.model.query(filter).then(function (data) {
         if (dataKey && Array.isArray(data[dataKey])) {
           return data[dataKey];
