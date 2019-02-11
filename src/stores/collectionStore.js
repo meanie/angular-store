@@ -32,7 +32,7 @@ angular.module('Store.CollectionStore.Service', [
   /**
    * Query items from model
    */
-  CollectionStore.prototype.query = function(filter, refresh, dataKey) {
+  CollectionStore.prototype.query = function(filter, refresh) {
 
     //Boolean passed as filter? Assume it's the refresh parameter
     if (typeof filter === 'boolean') {
@@ -50,6 +50,9 @@ angular.module('Store.CollectionStore.Service', [
       this.warnMissingMethod('query');
       return $q.resolve([]);
     }
+
+    //Get data key from config
+    const {dataKey} = this.config;
 
     //Query from server
     return this.model
