@@ -254,8 +254,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           return _this.add(item);
         });
 
-        //If this wasn't a filter query, mark as loaded if we got any items
-        if (!filter && items.length > 0) {
+        //If this wasn't a filter query, mark as loaded
+        if (!filter) {
           _this.isLoaded = true;
         }
 

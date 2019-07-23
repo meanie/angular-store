@@ -1,7 +1,7 @@
 {
   "name": "@meanie/angular-store",
   "description": "An Angular service for managing model instances",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "homepage": "https://github.com/meanie/angular-store",
   "author": {
     "name": "Adam Reis",
