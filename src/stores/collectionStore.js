@@ -71,8 +71,8 @@ angular.module('Store.CollectionStore.Service', [
         //Add the items
         items.forEach(item => this.add(item));
 
-        //If this wasn't a filter query, mark as loaded if we got any items
-        if (!filter && items.length > 0) {
+        //If this wasn't a filter query, mark as loaded
+        if (!filter) {
           this.isLoaded = true;
         }
 
