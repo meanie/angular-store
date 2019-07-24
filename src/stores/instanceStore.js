@@ -22,6 +22,7 @@ angular.module('Store.InstanceStore.Service', [
     //Prepare instance and promise placeholders
     this.instance = null;
     this.promise = null;
+    this.cacheEmpty = config.cacheEmpty || false;
   }
 
   /**
@@ -40,8 +41,8 @@ angular.module('Store.InstanceStore.Service', [
       filter = null;
     }
 
-    //Already present?
-    if (this.instance && !refresh) {
+    //Already present, or loaded but not present and allow empty caching?
+    if ((this.instance || (this.isLoaded && this.cacheEmpty)) && !refresh) {
       return $q.resolve(this.instance);
     }
 
@@ -59,7 +60,11 @@ angular.module('Store.InstanceStore.Service', [
     //Get from server
     this.promise = this.model
       .get(filter)
-      .then(instance => (this.instance = instance))
+      .then(instance => {
+        this.isLoaded = true;
+        this.instance = instance;
+        return instance;
+      })
       .finally(() => this.promise = null);
 
     //Return promise
@@ -71,7 +76,11 @@ angular.module('Store.InstanceStore.Service', [
    */
   InstanceStore.prototype.set = function(instance) {
     return this.validateIsModel(instance, true)
-      .then(instance => (this.instance = instance));
+      .then(instance => {
+        this.isLoaded = true;
+        this.instance = instance;
+        return instance;
+      })
   };
 
   /**
@@ -79,6 +88,7 @@ angular.module('Store.InstanceStore.Service', [
    */
   InstanceStore.prototype.clear = function() {
     this.instance = null;
+    this.isLoaded = false;
     return $q.resolve();
   };
 

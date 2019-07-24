@@ -22,6 +22,7 @@ angular.module('Store.CollectionStore.Service', [
     //Prepare collection
     this.collection = new Map();
     this.isLoaded = false;
+    this.cacheEmpty = config.cacheEmpty || false;
   }
 
   /**
@@ -72,7 +73,7 @@ angular.module('Store.CollectionStore.Service', [
         items.forEach(item => this.add(item));
 
         //If this wasn't a filter query, mark as loaded
-        if (!filter) {
+        if (!filter && (items.length > 0 || this.cacheEmpty)) {
           this.isLoaded = true;
         }
 
