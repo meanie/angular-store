@@ -205,6 +205,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       //Prepare collection
       this.collection = new Map();
       this.isLoaded = false;
+      this.cacheEmpty = config.cacheEmpty || false;
     }
 
     /**
@@ -255,7 +256,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         });
 
         //If this wasn't a filter query, mark as loaded
-        if (!filter) {
+        if (!filter && (items.length > 0 || _this.cacheEmpty)) {
           _this.isLoaded = true;
         }
 
@@ -416,6 +417,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       //Prepare instance and promise placeholders
       this.instance = null;
       this.promise = null;
+      this.cacheEmpty = config.cacheEmpty || false;
     }
 
     /**
@@ -435,8 +437,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         filter = null;
       }
 
-      //Already present?
-      if (this.instance && !refresh) {
+      //Already present, or loaded but not present and allow empty caching?
+      if ((this.instance || this.isLoaded && this.cacheEmpty) && !refresh) {
         return $q.resolve(this.instance);
       }
 
@@ -453,7 +455,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       //Get from server
       this.promise = this.model.get(filter).then(function (instance) {
-        return _this.instance = instance;
+        _this.isLoaded = true;
+        _this.instance = instance;
+        return instance;
       }).finally(function () {
         return _this.promise = null;
       });
@@ -469,7 +473,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       var _this2 = this;
 
       return this.validateIsModel(instance, true).then(function (instance) {
-        return _this2.instance = instance;
+        _this2.isLoaded = true;
+        _this2.instance = instance;
+        return instance;
       });
     };
 
@@ -478,6 +484,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
      */
     InstanceStore.prototype.clear = function () {
       this.instance = null;
+      this.isLoaded = false;
       return $q.resolve();
     };
 
