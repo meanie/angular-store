@@ -1,7 +1,7 @@
 /**
  * @meanie/angular-store * https://github.com/meanie/angular-store
  *
- * Copyright (c) 2019 Adam Reis <adam@reis.nz>
+ * Copyright (c) 2020 Adam Reis <adam@reis.nz>
  * License: MIT
  */
 (function (window, angular, undefined) {
